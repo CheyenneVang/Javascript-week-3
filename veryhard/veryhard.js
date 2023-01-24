@@ -37,14 +37,18 @@ class Programmer extends Person {
 
     // updates busy to true
     acceptNewTask() {
-        return this.busy = true;
+        if (this.busy) { // if busy is true in the default then update to false
+            return this.busy = false;
+        } else { 
+            return this.busy = true;
+        }
     }
 
     offerNewTask() {
-        if (this.busy === this.completeTask()) {
-             console.log("Mark can't accept any new tasks right now.");
+        if (this.acceptNewTask()) {
+             console.log(`${this.name} can't accept any new tasks right now.`);
         } else {
-            console.log("Mark would love to take on a new responsibility.");
+            console.log(`${this.name} would love to take on a new responsibility.`);
         }
     }
 
@@ -62,6 +66,9 @@ const programmer1 = new Programmer("Liana", "DevOps", 35, ["HTML", "C#", "LUA"])
 const programmer2 = new Programmer("Edwin", "janitor", 55, ["HTML", "SASS", "Ruby"]);
 
 const programmer3 = new Programmer("Emmanuella", "SysOps", 31, ["HTML", "CSS", "JS", "R"]);
+
+programmer1.offerNewTask();
+console.log(programmer1);
 
 programmer1.completeTask();
 console.log(programmer1);
@@ -96,8 +103,7 @@ person1.exercise();
 
 person1.fetchJob();
 
-programmer1.offerNewTask();
-console.log(programmer1);
+
 
 programmer3.completeTask();
 console.log(programmer3);
